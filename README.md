@@ -1,4 +1,4 @@
-# 🚀 Node.js & Nuxt 3 ile Geliştirdiğim Full-Stack E-Ticaret Portalı ve Yönetim Paneli
+#  Node.js & Nuxt 3 ile Geliştirdiğim Full-Stack E-Ticaret Portalı ve Yönetim Paneli
 
 Bu projede; sunucu tarafında **Node.js (Nitro Engine)**, istemci tarafında **Nuxt 3 (Vue 3 Composition API)** ve veritabanı katmanında **Prisma ORM & PostgreSQL** mimarisini kullanarak performans, veri tutarlılığı, kullanıcı deneyimi (UX) ve uçtan uca API güvenliği odaklı modern bir e-ticaret portalı ve yönetim paneli geliştirdim.
 
