@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("USER") // "USER" (normal kullanıcı) veya "ADMIN" (yönetici)
+  orders    Order[]
+  createdAt DateTime @default(now())
+  reviews   Review[]
+  questions Question[]
+  favorites Favorite[]
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  stock       Int      @default(0)
+  image       String?
+  category    String   @default("Genel")
+  createdAt   DateTime @default(now())
+  orderItems  OrderItem[]
+  reviews   Review[]
+  questions Question[]
+  favorites Favorite[]
+}
+
+model Order {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  totalAmount Float
+  status      String   @default("Hazırlanıyor")
+  createdAt   DateTime @default(now())
+  items       OrderItem[]
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId Int     
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int     
+  price     Float   
+}
+//Ürün yorumlarının ve puanların bulunduğu yer
+model Review {
+  id        Int      @id @default(autoincrement())
+  rating    Int      @default(5)
+  comment   String
+  createdAt DateTime @default(now())
+  
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+model Question {
+  id        Int      @id @default(autoincrement())
+  text      String
+  answer    String?  // Admin cevap verdiğinde burası dolacak
+  createdAt DateTime @default(now())
+
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  productId Int
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId]) // Bir kullanıcı bir ürünü sadece bir kez favoriye ekleyebilir
+}
