@@ -162,7 +162,7 @@ Veritabanı Katmanı: PostgreSQL & Prisma ORM
 
 🚀 Kurulum ve Çalıştırma
 1. Depoyu Klonlayın
-Bash
+```Bash
 git clone [https://github.com/kullanici_adin/repo_adin.git](https://github.com/kullanici_adin/repo_adin.git)
 cd repo_adin
 2. Bağımlılıkları Yükleyin
@@ -181,6 +181,6 @@ npx prisma generate
 Bash
 npm run dev
 Uygulama yerel olarak http://localhost:3000 adresinde çalışmaya başlayacaktır.
-
+```
 🔒 Güvenlik Notu
 Projenin veritabanı kimlik bilgileri, API gizli anahtarları ve canlı üretim şifreleri .gitignore kuralları doğrultusunda yerel ortamımda korunmaktadır ve GitHub deposunda kesinlikle yer almamaktadır.
